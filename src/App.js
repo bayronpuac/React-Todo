@@ -1,6 +1,6 @@
 import React from 'react';
-import TodoForm from './components/TodoComponents/TodoForm'
-import TodoList from './components/TodoComponents/TodoList'
+import TodoForm from './components/TodoComponents/TodoForm';
+import TodoList from './components/TodoComponents/TodoList';
 
 
 const todoData = [
@@ -23,6 +23,7 @@ class App extends React.Component {
     this.state ={
       tasks: todoData
     };
+  }
 
 
     toggleItem = id => {
@@ -32,12 +33,12 @@ class App extends React.Component {
               return {
                 ...task,
                 completed: !task.completed
-              };
+              }
             } else  {
               return task;
             }
           })
-      });
+      })
     };
     addTask = task => {
       const newTask ={
@@ -47,15 +48,16 @@ class App extends React.Component {
       };
       this.setState({
         tasks: [...this.state.tasks, newTask]
-      });
+      })
     };
+
     clearCompleted = () => {
       this.setState({
         tasks: this.states.tasks.filter(tasks =>
           !tasks.completed)
-      }); 
+      })
     };
-  }
+  
 
 
   // you will need a place to store your state in this component.
@@ -66,7 +68,7 @@ class App extends React.Component {
       <div className="App">
         <div className="header">
           <h1>Todo List</h1>
-          <TodoForm addItem={this.addTask} />
+          <TodoForm addTask={this.addTask} />
         </div>
         <TodoList
           tasks={this.state.tasks}
