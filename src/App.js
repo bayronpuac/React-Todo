@@ -1,16 +1,15 @@
 import React from 'react';
 import TodoForm from './components/TodoComponents/TodoForm';
-import TodoList from './components/TodoComponents/TodoList';
+import TodoList from './components/TodoComponents/TodoList';import './components/TodoComponents/Todo.css';
 
-
-const todoData = [
+const todosData = [
     {
-      task: 'Organize Garage',
+      name: 'Organize Garage',
       id: 1528817077286,
       completed: false
     },
     {
-      task: 'Bake Cookies',
+      name: 'Bake Cookies',
       id: 1528817084358,
       completed: false
     }
@@ -20,42 +19,42 @@ const todoData = [
 class App extends React.Component {
   constructor(){
     super();
-    this.state ={
-      tasks: todoData
+    this.state = {
+      todos: todosData
     };
   }
 
 
-    toggleItem = id => {
+    toggleTodo = id => {
       this.setState ({
-          tasks: this.state.tasks.map(task => {
-            if (task.id === id ){
+          todos: this.state.todos.map(todo => {
+            if (todo.id === id ){
               return {
-                ...task,
-                completed: !task.completed
+                ...todo,
+                completed: !todo.completed
               }
             } else  {
-              return task;
+              return todo;
             }
           })
-      })
+      });
     };
-    addTask = task => {
-      const newTask ={
-        name: task,
+    addTodo = todoName => {
+      const newTodo = {
+        name: todoName,
         id: Date.now(),
         completed: false
       };
       this.setState({
-        tasks: [...this.state.tasks, newTask]
-      })
+        todos: [...this.state.todos, newTodo]
+      });
     };
 
     clearCompleted = () => {
       this.setState({
-        tasks: this.states.tasks.filter(tasks =>
-          !tasks.completed)
-      })
+        todos: this.state.todos.filter(todo =>
+          !todo.completed)
+      });
     };
   
 
@@ -68,11 +67,12 @@ class App extends React.Component {
       <div className="App">
         <div className="header">
           <h1>Todo List</h1>
-          <TodoForm addTask={this.addTask} />
+          <TodoForm addTodo={this.addTodo} />
         </div>
         <TodoList
-          tasks={this.state.tasks}
-          toggleItem={this.toggleItem}
+          todos={this.state.todos}
+          toggleTodo={this.toggleTodo}
+          clearCompleted={this.clearCompleted}
         />
       </div>
     );
