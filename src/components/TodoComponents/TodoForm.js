@@ -11,7 +11,10 @@ handleChanges = e => {
     this.setState({
         [e.target.name]: e.target.value
     });
+    console.log(this.state.todo);
 };
+
+
 
 submitTodo = e => {
     e.preventDefault();
@@ -27,7 +30,7 @@ render() {
             placeholder='Add new task here'
             title='Task'
             onChange={this.handleChanges}
-            value={this.todo}
+            value={this.state.todo}
             />
             <button>Add ToDo</button>
         </form>

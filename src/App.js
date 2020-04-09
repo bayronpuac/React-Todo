@@ -1,6 +1,7 @@
 import React from 'react';
 import TodoForm from './components/TodoComponents/TodoForm';
-import TodoList from './components/TodoComponents/TodoList';import './components/TodoComponents/Todo.css';
+import TodoList from './components/TodoComponents/TodoList';
+import './components/TodoComponents/Todo.css';
 
 const todosData = [
     {
@@ -25,6 +26,7 @@ class App extends React.Component {
   }
 
 
+
     toggleTodo = id => {
       this.setState ({
           todos: this.state.todos.map(todo => {
@@ -39,8 +41,12 @@ class App extends React.Component {
           })
       });
     };
+    
     addTodo = todoName => {
-      const newTodo = {
+      if(!todoName){
+        return null
+      } else {
+        const newTodo = {
         name: todoName,
         id: Date.now(),
         completed: false
@@ -48,12 +54,14 @@ class App extends React.Component {
       this.setState({
         todos: [...this.state.todos, newTodo]
       });
+      }
+      
     };
 
     clearCompleted = () => {
       this.setState({
         todos: this.state.todos.filter(todo =>
-          !todo.completed)
+          todo.completed === false)
       });
     };
   
@@ -63,6 +71,7 @@ class App extends React.Component {
   // design `App` to be the parent component of your application.
   // this component is going to take care of state, and any change handlers you need to work with your state
   render() {
+    console.log(this.state.todos)
     return (
       <div className="App">
         <div className="header">
